@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Práctica SQL - Ejercicios</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <div class="container header-content">
+            <h1>Ejercicios de la guía de Base de datos utn frba</h1>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="controls">
+            <div class="search-box">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                <input type="text" id="searchInput" placeholder="Buscar por enunciado o código SQL...">
+            </div>
+            <div class="filter-box">
+                <select id="categoryFilter">
+                    <option value="all">Todas las categorías</option>
+                    <!-- Las categorías se insertan dinámicamente -->
+                </select>
+            </div>
+            <button id="expandAllBtn" class="expand-all-btn">Expandir todo</button>
+        </section>
+
+        <section id="exercisesList" class="exercises-grid">
+            <!-- Los ejercicios se insertan dinámicamente -->
+        </section>
+    </main>
+
+    <script src="data.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
