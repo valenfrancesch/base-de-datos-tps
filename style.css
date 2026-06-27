@@ -298,3 +298,62 @@ code {
     border-radius: 0.5rem;
     border: 1px dashed var(--border);
 }
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.pdf-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background-color: var(--primary);
+    color: white;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 0.375rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: background-color 0.2s;
+}
+
+.pdf-btn:hover {
+    background-color: var(--primary-hover);
+}
+
+.entity-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-bottom: 1rem;
+}
+
+.entity-tag {
+    background-color: #f1f5f9;
+    color: #475569;
+    border: 1px solid #cbd5e1;
+    padding: 0.15rem 0.4rem;
+    border-radius: 0.25rem;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.025em;
+    text-transform: uppercase;
+}
+
+/* Category colors */
+.cat-sql {
+    background-color: rgba(79, 70, 229, 0.1);
+    color: #4f46e5;
+}
+
+.cat-t-sql {
+    background-color: rgba(16, 185, 129, 0.1);
+    color: #10b981;
+}
+
+.cat-parcial {
+    background-color: rgba(245, 158, 11, 0.1);
+    color: #f59e0b;
+}

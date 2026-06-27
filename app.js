@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const exercisesList = document.getElementById('exercisesList');
     const searchInput = document.getElementById('searchInput');
     const categoryFilter = document.getElementById('categoryFilter');
+    const entityFilter = document.getElementById('entityFilter');
     const expandAllBtn = document.getElementById('expandAllBtn');
     
     let allExpanded = false;
@@ -13,6 +14,15 @@ document.addEventListener('DOMContentLoaded', () => {
         option.value = cat;
         option.textContent = cat;
         categoryFilter.appendChild(option);
+    });
+
+    // Populate entities
+    const allEntities = [...new Set(exercisesData.flatMap(ex => ex.entities || []))].sort();
+    allEntities.forEach(ent => {
+        const option = document.createElement('option');
+        option.value = ent;
+        option.textContent = ent;
+        entityFilter.appendChild(option);
     });
 
     expandAllBtn.addEventListener('click', () => {
@@ -61,11 +71,24 @@ document.addEventListener('DOMContentLoaded', () => {
         data.forEach(ex => {
             const card = document.createElement('article');
             card.className = 'exercise-card';
+            
+            // Map category to CSS class
+            let catClass = '';
+            if (ex.category === 'SQL') catClass = 'cat-sql';
+            else if (ex.category === 'T-SQL') catClass = 'cat-t-sql';
+            else if (ex.category === 'Parcial') catClass = 'cat-parcial';
+
+            // Generate entities HTML
+            const entitiesHtml = (ex.entities && ex.entities.length > 0)
+                ? `<div class="entity-tags">${ex.entities.map(e => `<span class="entity-tag">${e}</span>`).join('')}</div>`
+                : '';
+
             card.innerHTML = `
                 <div class="exercise-header">
-                    <span class="category-badge">${ex.category}</span>
+                    <span class="category-badge ${catClass}">${ex.category}</span>
                     <h2 class="exercise-title">Ejercicio ${ex.id}</h2>
                 </div>
+                ${entitiesHtml}
                 <p class="exercise-statement">${ex.statement}</p>
                 
                 <div class="solution-container">
@@ -121,11 +144,13 @@ document.addEventListener('DOMContentLoaded', () => {
     function filterData() {
         const query = searchInput.value.toLowerCase();
         const category = categoryFilter.value;
+        const entity = entityFilter.value;
 
         const filtered = exercisesData.filter(ex => {
             const matchesSearch = ex.statement.toLowerCase().includes(query) || ex.solution.toLowerCase().includes(query);
             const matchesCategory = category === 'all' || ex.category === category;
-            return matchesSearch && matchesCategory;
+            const matchesEntity = entity === 'all' || (ex.entities && ex.entities.includes(entity));
+            return matchesSearch && matchesCategory && matchesEntity;
         });
 
         renderExercises(filtered);
@@ -133,6 +158,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     searchInput.addEventListener('input', filterData);
     categoryFilter.addEventListener('change', filterData);
+    entityFilter.addEventListener('change', filterData);
 
     // Initial render
     renderExercises(exercisesData);
